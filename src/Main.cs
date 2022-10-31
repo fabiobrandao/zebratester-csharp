@@ -21,7 +21,8 @@ namespace ZebraTester
         private void btnPrint_Click(object sender, EventArgs e)
         {
             string ip = txbIP.Text;
-            string zplData = txbZplData.Text;
+            string zplData = txbZplData.Text.Replace("\n", string.Empty);
+
             int quantity = int.Parse(txbQtd.Text);
 
             List<DataPrinter> dataPrint = new List<DataPrinter>();
@@ -60,13 +61,9 @@ namespace ZebraTester
                     data.Send = true;
 
                     if (CheckPrintingStatus(printer))
-                    {
                         data.Print = true;
-                    }
                     else
-                    {
                         break;
-                    }
                 }
             }
 
@@ -75,7 +72,6 @@ namespace ZebraTester
             if (noPrinted != null && noPrinted.Count > 0)
             {
                 MessageBox.Show("Press OK to Continue...");
-
                 Print(ipAddress, noPrinted);
             }
 
